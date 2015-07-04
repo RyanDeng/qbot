@@ -12,6 +12,7 @@ type GroupMsg struct {
 }
 
 type Postman interface {
+	Type() string
 	SendMsg(to string, msg string) error
 	RecvMsg() chan Msg
 	SendGroupMsg(gid string, msg string) error
