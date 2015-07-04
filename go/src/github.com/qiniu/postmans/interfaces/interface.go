@@ -1,4 +1,4 @@
-package qbot
+package interfaces
 
 type Msg struct {
 	From string
