@@ -1,10 +1,10 @@
 package qbot
 
 import (
-	"labix.org/v2/mgo"
-	"time"
-	//"labix.org/v2/mgo/bson"
 	qmgo "github.com/qiniu/qbot/mgo"
+	"labix.org/v2/mgo"
+	"labix.org/v2/mgo/bson"
+	"time"
 )
 
 type ContactTbl struct {
@@ -48,4 +48,25 @@ func (t *ReminderTbl) Insert(reminder *Reminder) error {
 	reminder.CreatedAt = time.Now().UnixNano()
 
 	return c.Insert(reminder)
+}
+
+type M bson.M
+
+func (t *ReminderTbl) GetAndDelete() (r Reminder, ok bool, err error) {
+
+	c := qmgo.CopyCollection(t.coll)
+	defer qmgo.CloseCollection(c)
+
+	now := time.Now().UnixNano()
+
+	q := M{"time": M{"$lte": now}}
+	err = c.Find(q).One(&r)
+	if err == nil {
+		c.RemoveId(r.Id)
+		ok = true
+	}
+	if err == mgo.ErrNotFound {
+		err = nil
+	}
+	return
 }

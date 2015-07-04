@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"time"
 )
 
 type Config struct {
@@ -42,6 +43,20 @@ func main() {
 		log.Fatal(err)
 		os.Exit(-1)
 	}
+
+	go func() {
+		time.Sleep(5 * time.Second)
+		r, ok, err := service.ReminderTbl.GetAndDelete()
+		if err != nil {
+			log.Error("GetAndDelete:", err)
+			continue
+		}
+		if ok {
+			for _, to := range r.Tos {
+				postman.SendMsg(to, r.Event)
+			}
+		}
+	}()
 
 	var postman interfaces.Postman
 	for {

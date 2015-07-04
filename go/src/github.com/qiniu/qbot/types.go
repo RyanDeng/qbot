@@ -1,5 +1,9 @@
 package qbot
 
+import (
+	"labix.org/v2/mgo/bson"
+)
+
 //-----------------
 type From struct {
 	CliType string `json:"cli_type" bson:"cli_type"`
@@ -11,12 +15,13 @@ type To struct {
 }
 
 type Reminder struct {
-	From      From   `json:"from" bson:"from"`
-	Tos       []To   `json:"to" bson:"to"`
-	Time      int64  `json:"time" bson:"time"`
-	Status    string `json:"status" bson:"status"`
-	Event     string `json:"event" bson:"event"`
-	CreatedAt int64  `json:"created_at bson:"created_at"`
+	Id        bson.ObjectId `json:"-" bson:"_id"`
+	From      From          `json:"from" bson:"from"`
+	Tos       []To          `json:"to" bson:"to"`
+	Time      int64         `json:"time" bson:"time"`
+	Status    string        `json:"status" bson:"status"`
+	Event     string        `json:"event" bson:"event"`
+	CreatedAt int64         `json:"created_at bson:"created_at"`
 }
 
 //------------------
