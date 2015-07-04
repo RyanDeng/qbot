@@ -5,13 +5,17 @@ import (
 )
 
 //-----------------
+type Account struct {
+	Id      string `json:"id" bson:"id"`
+	IsGroup bool   `json:"is_group" bson:"is_group"`
+}
 type From struct {
-	CliType string `json:"cli_type" bson:"cli_type"`
-	AccId   string `json:"account" bson:"account"`
+	CliType string  `json:"cli_type" bson:"cli_type"`
+	AccId   Account `json:"account" bson:"account"`
 }
 type To struct {
-	CliType string   `json:"cli_type" bson:"cli_type"`
-	AccIds  []string `json:"accounts" bson:"accounts"`
+	CliType string    `json:"cli_type" bson:"cli_type"`
+	AccIds  []Account `json:"accounts" bson:"accounts"`
 }
 
 type Reminder struct {
@@ -26,13 +30,13 @@ type Reminder struct {
 
 //------------------
 type Contact struct {
-	Name       string   `json:"name" bson:"name"`
-	Photo      string   `json:"photo" bson:"photo"`
-	Phone      int64    `json:"phone" bson:"phone"`
-	NickName   []string `json:"nickname" bson:"nickname"`
-	Email      string   `json:"email" bson:"email"`
-	QQ         string   `json:"qq" bson:"qq"`
-	Department string   `json:"dept" bson:"dept"`
-	CreatedAt  int64    `json:"created_at" bson:"created_at"`
-	UpdatedAt  int64    `json:"updated_at" bson:"updated_at"`
+	Name       string `json:"name" bson:"name"`
+	Photo      string `json:"photo" bson:"photo"`
+	Phone      int64  `json:"phone" bson:"phone"`
+	NickName   string `json:"nickname" bson:"nickname"`
+	Email      string `json:"email" bson:"email"`
+	QQ         string `json:"qq" bson:"qq"`
+	Department string `json:"dept" bson:"dept"`
+	CreatedAt  int64  `json:"created_at" bson:"created_at"`
+	UpdatedAt  int64  `json:"updated_at" bson:"updated_at"`
 }
