@@ -1,11 +1,15 @@
 package qbot
 
 import (
+	"fmt"
 	"labix.org/v2/mgo"
+	"labix.org/v2/mgo/bson"
 	"time"
 	//"labix.org/v2/mgo/bson"
 	qmgo "github.com/qiniu/qbot/mgo"
 )
+
+type M bson.M
 
 type ContactTbl struct {
 	coll *mgo.Collection
@@ -26,6 +30,25 @@ func (t *ContactTbl) Insert(contact *Contact) error {
 	contact.CreatedAt = time.Now().UnixNano()
 
 	return c.Insert(contact)
+}
+func (t *ContactTbl) SearchByAllName(name string) (contacts []Contact, err error) {
+	c := qmgo.CopyCollection(t.coll)
+	defer qmgo.CloseCollection(c)
+
+	sel := M{
+		"$or": []M{
+			M{"name": name},
+			M{"nickname": name},
+		},
+	}
+	fmt.Println("search condition", sel)
+
+	err = c.Find(sel).All(&contacts)
+	fmt.Println(contacts)
+	if err == mgo.ErrNotFound {
+		err = nil
+	}
+	return
 }
 
 //-----------------

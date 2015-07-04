@@ -2,7 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/qiniu/postmans/interfaces"
+	"github.com/qiniu/postmans"
+
 	"github.com/qiniu/qbot"
 	"io/ioutil"
 	"log"
@@ -37,22 +38,34 @@ func main() {
 	cfg := &qbot.Config{
 		DBSettings: conf.DBSettings,
 	}
+
+	confStr := `{"host": ":8870", "jsHost": "http://192.168.200.244:8890"}`
+	gen, ok := postmans.Get("QQ")
+	if !ok {
+		panic("QQ not found")
+	}
+
+	postman, err := gen(confStr)
+	if err != nil {
+		panic(err)
+	}
+
 	service, err := qbot.NewService(cfg)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(-1)
 	}
 
-	var postman interfaces.Postman
 	for {
 		select {
 		case msg := <-postman.RecvMsg():
 			go func() {
-				service.AI(msg)
+				service.AI(&msg, postman)
 			}()
+
 		case grpmsg := <-postman.RecvGroupMsg():
 			go func() {
-				service.GroupAI(grpmsg)
+				service.GroupAI(&grpmsg, postman)
 			}()
 		default:
 		}
