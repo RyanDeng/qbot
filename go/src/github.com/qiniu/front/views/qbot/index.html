@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Q宝</title>
+	<link href="[[Asset "/public/qbot/image/icon.ico"]]" rel="shortcut icon">
+	<link rel="stylesheet" type="text/css" href="[[Asset "/public/qbot/main.min.css"]]">
+	<link rel="stylesheet" type="text/css" href="[[Asset "/public/libs/bootstrap.min.css"]]">
+	<link rel="stylesheet" type="text/css" href="[[Asset "/public/libs/jquery.growl.css"]]">
+	
+	<script src="[[Asset "/public/libs/jquery-1.9.1.min.js"]]"></script>
+	<script src="[[Asset "/public/libs/plupload.js"]]"></script>
+	<script src="[[Asset "/public/libs/bootstrap.min.js"]]"></script>
+	<script src="[[Asset "/public/libs/jquery.growl.js"]]"></script>
+	<script src="[[Asset "/public/qbot/qiniu.js"]]"></script>
+	<script src="[[Asset "/public/qbot/main.min.js"]]"></script>
+
+	
+</head>
+<body>
+	<div class="container">
+		<div class="header clearfix">
+			<div class="left">
+				<img src="[[Asset "/public/qbot/image/logo.png"]]">
+				<p><b>QBot</b>-——我们的工作小助手</p>
+			</div>
+			<div class="right">
+				<img src="[[Asset "/public/qbot/image/icon.png"]]">
+				<p>QBot</p>
+			</div>
+		</div>
+		<div class="content clearfix">
+			<div class="left-slider">
+				<div class="bar">添加联系人</div>
+				<div class="add-infor clearfix">
+					<div id="photo">
+						<a id="uploads"><img src="[[Asset "/public/qbot/image/photo-img.png"]]"></a>
+					</div>
+					<div class="add-form">
+						<form id="qbot-submit">
+							<div class="form-group">
+								<label for="">姓名：</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="">手机号：</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="">绰号：</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="">qq：</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="">邮箱：</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="">部门：</label>
+								<input type="text" class="form-control">
+							</div>
+							<!-- <div class="form-group">
+								<label for="">验证码：</label>
+								<div class="verify clearfix">
+					                <input type="text" class="form-control" name="verify_code">
+					                <div><img id="verifyCode" src="/verify/code?ref=qbot"></div><span class="point"></span>
+					            </div>
+							</div> -->
+							
+							<input type="button" id="submit-btn" value="添加" class="submit btn">
+							<input type="button" id="cancel-btn" value="取消" class="submit btn">
+							<span class="tips"></span>
+						</form>
+					</div>
+				</div>
+				<div class="tools">
+					<img src="[[Asset "/public/qbot/image/qq.png"]]">
+					<img src="[[Asset "/public/qbot/image/slack.png"]]">
+				</div>
+			</div>
+			<div class="right-slider">
+				<div class="slide-bar">通讯录</div>
+
+				<div class="book-group">
+					<div class="book clearfix">
+						<div class="portrait">
+							<img src="[[Asset "/public/qbot/image/hcl.png"]]">
+						</div>
+						<div class="card">
+							<p><b>Name：</b><span>黄晨丽</span></p>
+							<p><b>NickName：</b><span>chen</span></p>
+							<p><b>Phone：</b><span>13732272207</span></p>
+							<p><b>Department：</b><span>UX</span></p>
+						</div>
+					</div>
+					<div class="book clearfix">
+						<div class="portrait">
+							<img src="[[Asset "/public/qbot/image/xiaoxi.png"]]">
+						</div>
+						<div class="card">
+							<p><b>Name：</b><span>黄书熹</span></p>
+							<p><b>NickName：</b><span>小西</span></p>
+							<p><b>Phone：</b><span>13732272207</span></p>
+							<p><b>Department：</b><span>市场部</span></p>
+						</div>
+					</div>
+					<div class="book clearfix">
+						<div class="portrait">
+							<img src="[[Asset "/public/qbot/image/ltz.png"]]">
+						</div>
+						<div class="card">
+							<p><b>Name：</b><span>林天智</span></p>
+							<p><b>NickName：</b><span>小王子</span></p>
+							<p><b>Phone：</b><span>13732272207</span></p>
+							<p><b>Department：</b><span>BS</span></p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
