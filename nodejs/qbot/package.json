@@ -1,0 +1,24 @@
+{
+  "name": "qbot",
+  "version": "0.0.6",
+  "description": "qq命令行",
+  "keywords": [
+    "qq",
+    "cli",
+    "client",
+    "log",
+    "webqq",
+    "wqq"
+  ],
+  "repository": "git@github.com:qbox/qbot.git",
+  "bin": {
+    "qqlog": "bin/QBot.js"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "cli-color": "^0.3.2",
+    "express": "^4.11.1",
+    "body-parser": "*",
+    "request": "^2.51.0"
+  }
+}
