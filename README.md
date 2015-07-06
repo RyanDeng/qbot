@@ -1,3 +1,3 @@
-# ping!PONG
+# QBot
 
-项目名称是QBot 含义是Qbox Robot
+七牛Hackday项目，qq机器人
