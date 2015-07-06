@@ -58,20 +58,21 @@ func main() {
 	}
 
 	go func() {
-		time.Sleep(5 * time.Second)
-		r, ok, err := service.ReminderTbl.GetAndDelete()
-		if err != nil {
-			log.Error("GetAndDelete:", err)
-			continue
-		}
-		if ok {
-			for _, to := range r.Tos {
-				postman.SendMsg(to, r.Event)
+		for {
+			time.Sleep(5 * time.Second)
+			r, ok, err := service.ReminderTbl.GetAndDelete()
+			if err != nil {
+				log.Println("GetAndDelete:", err)
+				continue
+			}
+			if ok {
+				for _, to := range r.Tos {
+					postman.SendMsg(to, r.Event)
+				}
 			}
 		}
 	}()
 
-	var postman interfaces.Postman
 	for {
 		select {
 		case msg := <-postman.RecvMsg():

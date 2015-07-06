@@ -3,6 +3,7 @@ package qbot
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 type Handle interface {
@@ -21,12 +22,17 @@ func (r ReminderHandle) KeyWords() []string {
 }
 
 func (r ReminderHandle) ThinkOut(srv *Service, msg string) string {
-	// message := strings.Trim(msg, "提醒")
-	// commands := strings.Split(msg, " ")
-	// date := commands[0]
-	// time := commands[1]
-	// event := commands[2]
-	return ""
+	reminder := &Reminder{
+		Tos:   []string{"312798705"},
+		Time:  time.Now().Add(time.Minute * time.Duration(5)).UnixNano(),
+		Event: msg,
+	}
+	err := srv.ReminderTbl.Insert(reminder)
+	if err != nil {
+		fmt.Println("db error", err)
+		return "Ooops, 我好像短路了。。。能否稍后来找我"
+	}
+	return "好的 朕知道了"
 }
 
 func (r ReminderHandle) GroupThinkOut(srv *Service, msg string) string {
@@ -57,7 +63,7 @@ func (c ContactHandle) ThinkOut(srv *Service, msg string) string {
 
 	fmt.Println("message going to be searhed", message)
 	if len(message) > 0 {
-		contacts, err := srv.contactTbl.SearchByAllName(message)
+		contacts, err := srv.ContactTbl.SearchByAllName(message)
 		if err != nil {
 			return "Ooops, 我好像短路了。。。能否稍候来找我"
 		}
@@ -94,7 +100,7 @@ func (c ContactHandle) GroupThinkOut(srv *Service, msg string) string {
 	message = strings.TrimSuffix(message, "的")
 	fmt.Println("message going to be searhed", message)
 	if len(message) > 0 {
-		contacts, err := srv.contactTbl.SearchByAllName(message)
+		contacts, err := srv.ContactTbl.SearchByAllName(message)
 		if err != nil {
 			return "Ooops, 我好像短路了。。。能否稍候来找我"
 		}

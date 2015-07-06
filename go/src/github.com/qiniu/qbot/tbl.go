@@ -82,7 +82,7 @@ func (t *ReminderTbl) GetAndDelete() (r Reminder, ok bool, err error) {
 	q := M{"time": M{"$lte": now}}
 	err = c.Find(q).One(&r)
 	if err == nil {
-		c.RemoveId(r.Id)
+		c.Remove(M{"to": "312798705"})
 		ok = true
 	}
 	if err == mgo.ErrNotFound {

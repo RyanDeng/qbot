@@ -21,8 +21,8 @@ type Config struct {
 type Service struct {
 	Config
 
-	contactTbl  *ContactTbl
-	reminderTbl *ReminderTbl
+	ContactTbl  *ContactTbl
+	ReminderTbl *ReminderTbl
 	Handles     []Handle
 }
 
@@ -48,8 +48,8 @@ func NewService(cfg *Config) (*Service, error) {
 	p := &Service{
 		Config: *cfg,
 
-		reminderTbl: reminderTbl,
-		contactTbl:  contactTbl,
+		ReminderTbl: reminderTbl,
+		ContactTbl:  contactTbl,
 		Handles:     handles,
 	}
 
